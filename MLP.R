@@ -21,7 +21,7 @@ testSet <- scaledData[-sample,]
 CalculateMLP <- function(iters,learn,neurons)
 {
   formula <- as.formula('V3 ~ V1 + V2')
-  nn <- neuralnet(formula,trainSet,5,threshold = 0.1,stepmax = 1000,linear.output=FALSE)
+  nn <- neuralnet(formula,trainSet,neurons,threshold = 0.01,stepmax = iters,linear.output=FALSE, algorithm = 'backprop',learningrate = learn)
   prediction <- compute(nn,testSet[,1:2])
   resultData<-prediction$net.result
   resultData

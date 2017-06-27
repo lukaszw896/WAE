@@ -26,6 +26,10 @@ Error <- function(M1,M2)
     {
       points <- points + 1
     }
+    #print("-------------------")
+    #message("Result ",M1[i,1])
+    #message("Scaled ",val)
+    #message("Ideal ",M2[i,3])
   }
   result <- ((points*100)/n)
   result
@@ -34,15 +38,15 @@ Error <- function(M1,M2)
 Fitness  <- function(X)
 {
   iters <- BinToDec(paste(X[1:10] , collapse =""))
-  learn <- BinToDec(paste(X[11:20] , collapse =""))
-  neurons <- BinToDec(paste(X[21:30] , collapse =""))
-  print("Neurons:")
-  print(neurons)
+  learn <- (BinToDec(paste(X[11:15] , collapse ="")))/100
+  neurons <- BinToDec(paste(X[16:20] , collapse =""))
+
   result <- 0
     tryCatch(
       {
         resultData <- CalculateMLP(iters,learn,neurons)
         result <- Error(resultData,testSet)
+        print("Result")
         print(result)
         result
       },warning = function(w){

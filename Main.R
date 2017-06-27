@@ -23,6 +23,6 @@ testSet <- scaledData[-sample,]
 
 
 #run genetic algorithm
-GA <- ga("binary", fitness = Fitness, nBits = 30)
+GA <- ga("binary", fitness = Fitness, nBits = 20)
 summary(GA)
 plot(GA)
