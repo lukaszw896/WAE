@@ -22,4 +22,4 @@ formula <- as.formula('V3 ~ V1 + V2')
 nn <- neuralnet(formula,trainSet,5,threshold = 0.1,stepmax = 1000,linear.output=FALSE)
 prediction <- compute(nn,testSet[,1:2])
 print(head(prediction$net.result))
-
+resultData<-prediction$net.result
