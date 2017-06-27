@@ -3,6 +3,7 @@ library(foreach)
 library(GA)
 library(rstudioapi)
 library(neuralnet)
+library(doParallel)
 #set working directory
 setwd(dirname(getActiveDocumentContext()$path))
 #load files
@@ -23,6 +24,6 @@ testSet <- scaledData[-sample,]
 
 
 #run genetic algorithm
-GA <- ga("binary", fitness = Fitness, nBits = 20)
+GA <- ga("binary", fitness = Fitness, nBits = 24, maxiter = 20, popSize = 15, keepBest = TRUE)
 summary(GA)
 plot(GA)

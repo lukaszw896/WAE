@@ -37,14 +37,15 @@ Error <- function(M1,M2)
 
 Fitness  <- function(X)
 {
-  iters <- BinToDec(paste(X[1:10] , collapse =""))
+  iters <- BinToDec(paste(X[1:10] , collapse =""))*20
   learn <- (BinToDec(paste(X[11:15] , collapse ="")))/100
   neurons <- BinToDec(paste(X[16:20] , collapse =""))
+  thresh <- BinToDec(paste(X[21:24] , collapse =""))/100
 
   result <- 0
     tryCatch(
       {
-        resultData <- CalculateMLP(iters,learn,neurons)
+        resultData <- CalculateMLP(iters,learn,neurons,thresh)
         result <- Error(resultData,testSet)
         print("Result")
         print(result)

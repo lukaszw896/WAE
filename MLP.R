@@ -18,10 +18,10 @@ testSet <- scaledData[-sample,]
 #testMatrix <- data.matrix(testSet)
 
 
-CalculateMLP <- function(iters,learn,neurons)
+CalculateMLP <- function(iters,learn,neurons,thresholdParam)
 {
   formula <- as.formula('V3 ~ V1 + V2')
-  nn <- neuralnet(formula,trainSet,neurons,threshold = 0.01,stepmax = iters,linear.output=FALSE, algorithm = 'backprop',learningrate = learn)
+  nn <- neuralnet(formula,trainSet,neurons,threshold = thresholdParam, stepmax = iters,linear.output=FALSE, learningrate = learn)
   prediction <- compute(nn,testSet[,1:2])
   resultData<-prediction$net.result
   resultData
