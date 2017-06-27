@@ -1,7 +1,4 @@
-library(iterators)
-library(foreach)
-library(GA)
-
+source("MLP.R")
 BinToDec <- function(x) {
   sum(2^(which(rev(unlist(strsplit(as.character(x), "")) == 1))-1))
 }
@@ -34,17 +31,25 @@ Error <- function(M1,M2)
   result
 }
 
-
 Fitness  <- function(X)
 {
   iters <- BinToDec(paste(X[1:10] , collapse =""))
   learn <- BinToDec(paste(X[11:20] , collapse =""))
   neurons <- BinToDec(paste(X[21:30] , collapse =""))
+  print("Neurons:")
+  print(neurons)
   result <- 0
-  #do some neural shiet
-  result
+    tryCatch(
+      {
+        resultData <- CalculateMLP(iters,learn,neurons)
+        result <- Error(resultData,testSet)
+        print(result)
+        result
+      },warning = function(w){
+        result
+      },erro = function(e){
+        result
+      }
+    )
 }
 
-GA <- ga("binary", fitness = Fitness, nBits = 30)
-summary(GA)
-plot(GA)
