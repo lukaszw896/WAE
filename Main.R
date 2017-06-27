@@ -17,7 +17,7 @@ maxs <- apply(wholeData[,1:3], 2, max)
 mins <- apply(wholeData[,1:3], 2, min)
 scaledData <- scale(wholeData[,1:3],center = mins, scale = maxs - mins)
 #set seed so both sets will be reproducable
-set.seed(101)
+set.seed(117)
 sample <- sample.int(n = nrow(scaledData), size = floor(.50*nrow(scaledData)), replace = F)
 trainSet <- scaledData[sample,]
 testSet <- scaledData[-sample,]
@@ -27,3 +27,5 @@ testSet <- scaledData[-sample,]
 GA <- ga("binary", fitness = Fitness, nBits = 24, maxiter = 20, popSize = 15, keepBest = TRUE)
 summary(GA)
 plot(GA)
+GA@solution
+PrintResult(GA@solution)
